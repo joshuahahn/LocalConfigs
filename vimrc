@@ -8,6 +8,7 @@ set confirm
 set ruler
 set tabstop=4
 set shiftwidth=4
+set autoindent
 colo jellybeans
 
 set colorcolumn=80
