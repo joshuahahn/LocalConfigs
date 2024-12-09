@@ -13,6 +13,7 @@ export LSCOLORS=cxfxcxdxbxegedgxgxacad
 HISTFILE=~/.zsh_history  # Default history file location
 HISTSIZE=1000000000      # Number of commands stored in history
 SAVEHIST=1000000000      # Number of commands to save to history file
+setop hist_ignore_all_dups
 
 # Append to the history file instead of overwriting it
 setopt APPEND_HISTORY
