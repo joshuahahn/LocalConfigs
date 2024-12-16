@@ -13,7 +13,7 @@ export LSCOLORS=cxfxcxdxbxegedgxgxacad
 HISTFILE=~/.zsh_history  # Default history file location
 HISTSIZE=1000000000      # Number of commands stored in history
 SAVEHIST=1000000000      # Number of commands to save to history file
-setop hist_ignore_all_dups
+setopt hist_ignore_all_dups
 
 # Append to the history file instead of overwriting it
 setopt APPEND_HISTORY
@@ -25,7 +25,7 @@ compinit
 
 # Setting prompt text & color
 function slproml {
-    export PS1='%F{153}%* %F{183}[hahn:%~]%f$ '
+    export PS1='%B%F{153}%* %F{183}[hahn:%~]%f%b$ '
     PS2='> '
     PS4='+ '
 }
@@ -33,3 +33,5 @@ slproml
 
 # Starting up a new shell session displays the time (with cowsay)
 ( date +"It's %H:%M:%S" && date +"on %A, %b %d, %Y") | cowsay
+
+cd ~/Desktop
