@@ -23,13 +23,30 @@ setopt SHARE_HISTORY     # Share history between sessions
 autoload -Uz compinit
 compinit
 
-# Setting prompt text & color
-function slproml {
-    export PS1='%B%F{153}%* %F{183}[hahn:%~]%f%b$ '
-    PS2='> '
-    PS4='+ '
+# Get git branch, if exists
+function git-branch-name() {
+	local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+	if [ -z "$branch" ]; then
+		echo ""
+		return
+	fi
+	# Split the branch name by '/' and print only the last part
+	local parts=(${(s:/:)branch})
+	if [ ${#parts[@]} -gt 1 ]; then
+		echo " (${parts[-1]})"
+	else
+		echo " ($branch)"
+	fi
 }
-slproml
+
+# Setting prompt text & color
+function precmd() {
+	PS1="%B%F{153}%* %F{183}[hahn:%~$(git-branch-name)]%f%b$ "
+	PS2='> '
+	PS4='+ '
+}
+
+export PATH=$PATH:~/Desktop/hackermail
 
 # Starting up a new shell session displays the time (with cowsay)
 ( date +"It's %H:%M:%S" && date +"on %A, %b %d, %Y") | cowsay
