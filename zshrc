@@ -2,6 +2,7 @@
 export LANG=en_US.UTF-8
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 export PATH=~/Desktop/Programming/hackermail:$PATH
+export PATH=~/Desktop/Programming/funcat:$PATH
 # GHC Compiler for Haksell
 [ -f "/Users/joshuahahn/.ghcup/env" ] && source "/Users/joshuahahn/.ghcup/env"
 
@@ -23,32 +24,28 @@ setopt SHARE_HISTORY     # Share history between sessions
 autoload -Uz compinit
 compinit
 
-# Get git branch, if exists
-function git-branch-name() {
-	local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-	if [ -z "$branch" ]; then
-		echo ""
-		return
-	fi
-	# Split the branch name by '/' and print only the last part
-	local parts=(${(s:/:)branch})
-	if [ ${#parts[@]} -gt 1 ]; then
-		echo " (${parts[-1]})"
-	else
-		echo " ($branch)"
-	fi
-}
+# Set background color
+print -n "\e]11;#121212\a"
 
 # Setting prompt text & color
-function precmd() {
-	PS1="%B%F{153}%* %F{183}[hahn:%~$(git-branch-name)]%f%b$ "
-	PS2='> '
-	PS4='+ '
+function slproml {
+    export PS1='%B[%F{117}hahn %F{177}%D{%H:%M} %F{216}%~%f]%b '
+    PS2='> '
+    PS4='+ '
 }
 
-export PATH=$PATH:~/Desktop/hackermail
+#function slproml {
+#    export PS1='%B%F{153}%* %F{183}[hahn:%~]%f%b$ '
+#    PS2='> '
+#    PS4='+ '
+#}
+slproml
 
 # Starting up a new shell session displays the time (with cowsay)
-( date +"It's %H:%M:%S" && date +"on %A, %b %d, %Y") | cowsay
+#echo ("Hi Joshua!!!"
+#date +"It's %A, %b %d, %Y!") | cowsay -n
+
+echo -e "Hi Joshua!!\nIt's $(date '+%a %b %d %Y')" | cowsay
+echo -e "\n"
 
 cd ~/Desktop
