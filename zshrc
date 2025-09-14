@@ -48,4 +48,15 @@ slproml
 echo -e "Hi Joshua!!\nIt's $(date '+%a %b %d %Y')" | cowsay
 echo -e "\n"
 
+# Unfortunately, my Keychron V2 doesn't have the tilde symbol. This remaps
+# shift-tab to tilde.
+# Custom widget: insert a tilde
+function insert-tilde() {
+  LBUFFER+='~'
+}
+
+zle -N insert-tilde
+
+bindkey "^[[Z" insert-tilde
+
 cd ~/Desktop
