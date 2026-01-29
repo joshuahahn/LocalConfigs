@@ -1,21 +1,9 @@
-# .bashrc
-# bashrc is for aliases, functions, and shell configuration intended for use in
-# interactive shells.  However, in some circumstances, bash sources bashrc even
-# in non-interactive shells (e.g., when using scp), so it is standard practice
-# to check for interactivity at the top of .bashrc and return immediately if
-# the shell is not interactive.  The following line does that; don't remove it!
-[[ $- != *i* ]] && exit 1
-
-# Load CentOS stuff and Facebook stuff (don't remove these lines).
-source /etc/bashrc
-source /usr/facebook/ops/rc/master.bashrc
-
-# Keep oodles of command history (see https://fburl.com/bashhistory).
+# Keep oodles of command history
 HISTFILESIZE=-1
 HISTSIZE=1000000
 shopt -s histappend
 
-# Set up personal aliases, functions, etc.  See https://fburl.com/bash.
+# Set up personal aliases, functions, etc.
 export PATH=$PATH:~/repos/osandov-linux/bin
 
 export EDITOR=vim
@@ -48,13 +36,19 @@ function slproml {
 }
 slproml
 
-# Kernel aliases
-alias makekernel="./facebook/scripts/prepareconfig -a x86_64 -f default -p facebook/config > .config && \
-	./facebook/scripts/bootconfig -a x86_64 -f default -p facebook/config > facebook/config/bootconfig && \
-	make olddefconfig && \
-	make -j$(nproc)"
+# kernel aliases
 alias runvm="vm.py run MyVM -k ~/local/linux"
 alias hkml="~/local/repos/hackermail/hkml"
 alias makek="make -j$(nproc) tar-pkg 2>&1 1>stdout.log | tee stderr.log; tail -n 1 stdout.log"
 
-alias 80cols="echo ----x----x----x----x----x----x----x----x----x----x----x----x----x----x----x----x"
+# vim aliases
+alias vimr="vim -R"
+
+# tmux aliases
+alias attach="tmux attach"
+alias detach="tmux detach"
+
+# git aliases
+alias gl="git log --oneline"
+alias gs="git show"
+alias gd="git diff"
